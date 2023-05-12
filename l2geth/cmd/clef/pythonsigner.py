@@ -33,11 +33,11 @@ class PipeTransport(ServerTransport):
 
     def receive_message(self):
         data = self.input.readline()
-        print(">> {}".format( data))
+        print(f">> {data}")
         return None, urlparse.unquote(data)
 
     def send_reply(self, context, reply):
-        print("<< {}".format( reply))
+        print(f"<< {reply}")
         self.output.write(reply)
         self.output.write("\n")
 
@@ -139,7 +139,7 @@ class StdIOHandler():
         :return: nothing
         """
         if 'text' in message.keys():
-            sys.stderr.write("Error: {}\n".format( message['text']))
+            sys.stderr.write(f"Error: {message['text']}\n")
         return
 
     @public
@@ -153,14 +153,14 @@ class StdIOHandler():
         """
 
         if 'text' in message.keys():
-            sys.stdout.write("Error: {}\n".format( message['text']))
+            sys.stdout.write(f"Error: {message['text']}\n")
         return
 
 def main(args):
     cmd = ["clef", "--stdio-ui"]
     if len(args) > 0 and args[0] == "test":
         cmd.extend(["--stdio-ui-test"])
-    print("cmd: {}".format(" ".join(cmd)))
+    print(f'cmd: {" ".join(cmd)}')
     dispatcher = RPCDispatcher()
     dispatcher.register_instance(StdIOHandler(), '')
     # line buffered

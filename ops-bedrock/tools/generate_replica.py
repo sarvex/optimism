@@ -69,11 +69,11 @@ def main():
         sys.exit(1)
 
     log.info(f'Using network {network}.')
-    log.info(f'Downloading genesis.')
+    log.info('Downloading genesis.')
     get_network_file(outdir, bucket, network, 'genesis.json')
-    log.info(f'Downloading contracts.')
+    log.info('Downloading contracts.')
     get_network_file(outdir, bucket, network, 'contracts.json')
-    log.info(f'Downloading rollup config.')
+    log.info('Downloading rollup config.')
     get_network_file(outdir, bucket, network, 'rollup.json')
 
     log.info('Writing JWT secret.')

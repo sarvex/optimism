@@ -73,13 +73,12 @@ def main():
                 continue
             data = read_json(pjoin(deployment_dir, c))
             addresses[c.replace('.json', '')] = data['address']
-        sdk_addresses = {}
-        sdk_addresses.update({
+        sdk_addresses = {} | {
             'AddressManager': '0x0000000000000000000000000000000000000000',
             'StateCommitmentChain': '0x0000000000000000000000000000000000000000',
             'CanonicalTransactionChain': '0x0000000000000000000000000000000000000000',
             'BondManager': '0x0000000000000000000000000000000000000000',
-        })
+        }
         sdk_addresses['L1CrossDomainMessenger'] = addresses['Proxy__OVM_L1CrossDomainMessenger']
         sdk_addresses['L1StandardBridge'] = addresses['Proxy__OVM_L1StandardBridge']
         sdk_addresses['OptimismPortal'] = addresses['OptimismPortalProxy']
@@ -136,7 +135,7 @@ def run_command(args, check=True, shell=False, cwd=None, env=None):
 
 
 def wait_up(port, retries=10, wait_secs=1):
-    for i in range(0, retries):
+    for _ in range(0, retries):
         log.info(f'Trying 127.0.0.1:{port}')
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         try:

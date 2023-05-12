@@ -25,6 +25,5 @@ for dashboard in dashboard_list:
     response = f.read()
     decoded_html = response.decode('utf-8')
     data = decoded_html.replace('${DS_INFLUXDB}', 'InfluxDB')
-    d_file = open(os.path.join(dashboard_path, dashboard['filename']),'w')
-    d_file.write(data)
-    d_file.close()
+    with open(os.path.join(dashboard_path, dashboard['filename']),'w') as d_file:
+      d_file.write(data)

@@ -92,7 +92,9 @@ def main():
     base_sha = pr.base.sha
     head_sha = pr.head.sha
 
-    diffs = git_cmd('diff --name-only {}...{}'.format(base_sha, head_sha), monorepo_path).split('\n')
+    diffs = git_cmd(
+        f'diff --name-only {base_sha}...{head_sha}', monorepo_path
+    ).split('\n')
     log.info('Found diff. Checking for matches...')
     for diff in diffs:
         if match_path(diff, patterns):
